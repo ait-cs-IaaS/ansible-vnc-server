@@ -1,0 +1,8 @@
+[Unit]
+Description=Websockify translates WebSockets traffic to normal socket traffic
+
+[Service]
+ExecStart=/usr/local/bin/websockify-go :{{ websockify_port }} 127.0.0.1:{{ vnc_port }}
+
+[Install]
+WantedBy=multi-user.target

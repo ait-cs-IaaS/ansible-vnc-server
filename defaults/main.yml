@@ -1,0 +1,7 @@
+---
+vnc_server_packages:
+  - tigervnc-standalone-server
+
+websockify_version: "1.0.1"
+vnc_port: 5901
+websockify_port: 7000
