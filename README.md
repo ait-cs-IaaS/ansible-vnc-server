@@ -13,14 +13,31 @@ None.
 
 ## Role Variables
 
+```yaml
+websockify_version: "1.0.1"
+```
+
+```yaml
+vnc_port: 5901
+```
+
+```yaml
+websockify_port: 7000
+```
 
 ## Configuration example
 
-# Licence
+```yaml
+- name: Configure VNC
+  hosts: clients
+  roles:
+    - vnc-server
+```
+
+## Licence
 
 GPL-3.0
 
-# Author information
+## Author information
 
 Benjamin Akhras
-
