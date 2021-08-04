@@ -1,0 +1,30 @@
+---
+- name: vnc server packages
+  apt: 
+    name: "{{ vnc_server_packages }}" 
+    state: present
+
+- name: configure lightdm-vnc
+  template:
+    src: "lightdm-vnc.conf"
+    dest: "/etc/lightdm/lightdm.conf.d/vnc.conf"
+    mode: "0644"
+
+- name: configure lightdm-xdmcp
+  template:
+    src: "lightdm-xdmcp.conf"
+    dest: "/etc/lightdm/lightdm.conf.d/xdmcp.conf"
+    mode: "0644"
+
+- name: Copy securetty
+  copy:
+    remote_src: True
+    src: /usr/share/doc/util-linux/examples/securetty
+    dest: /etc/securetty
+
+- name: Remove kwallet from pam.d/lightdm*
+  lineinfile:
+    path: "/etc/pam.d/{{ item }}"
+    state: absent
+    regexp: '^(.*)pam_kwallet(\d?).so$'
+  loop: [ "lightdm", "lightdm-autologin", "lightdm-greeter" ]

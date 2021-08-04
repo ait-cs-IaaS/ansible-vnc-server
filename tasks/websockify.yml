@@ -1,0 +1,23 @@
+---
+- name: Download websockify
+  become: yes
+  get_url:
+    url: "https://github.com/b3n4kh/websockify-go/releases/download/{{ websockify_version }}/websockify-go"
+    dest: /usr/local/bin/websockify-go
+    mode: "0755"
+
+- name: configure websockify
+  become: yes
+  template:
+    src: "websockify.service"
+    dest: "/etc/systemd/system/websockify.service"
+    mode: "0644"
+
+- name: Start websockify service
+  become: yes
+  systemd:
+    name: websockify
+    enabled: yes
+    state: started
+    daemon_reload: yes
+
