@@ -2,10 +2,6 @@
 - name: Configure and install vnc-server
   tags: [vnc]
   include_tasks: vnc.yml
-  args:
-    apply:
-      become: yes
-      notify: restart lightdm
 
 - name: Configure and install websockify
   tags: [websockify]
