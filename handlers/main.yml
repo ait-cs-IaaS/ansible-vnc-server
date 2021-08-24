@@ -4,3 +4,9 @@
   service:
     name: lightdm
     state: restarted
+
+- name: restart Accounts Service
+  become: true
+  service:
+    name: accounts-daemon
+    state: restarted

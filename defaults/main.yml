@@ -5,3 +5,7 @@ vnc_server_packages:
 websockify_version: "1.0.1"
 vnc_port: 5901
 websockify_port: 7000
+
+lighdm_minimum_uid: 1000
+lighdm_hidden_users: ["nobody"]
+lighdm_hidden_shells: ["/bin/false", "/usr/sbin/nologin", "/sbin/nologin"]

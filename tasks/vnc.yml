@@ -1,40 +1,52 @@
 ---
 - name: vnc server packages
-  apt: 
-    name: "{{ vnc_server_packages }}" 
+  apt:
+    name: "{{ vnc_server_packages }}"
     state: present
-  become: yes
-  notify: restart lightdm
+  become: true
 
 - name: configure lightdm-vnc
   template:
     src: "lightdm-vnc.conf"
     dest: "/etc/lightdm/lightdm.conf.d/vnc.conf"
     mode: "0644"
-  become: yes
-  notify: restart lightdm
+  become: true
 
 - name: configure lightdm-xdmcp
   template:
     src: "lightdm-xdmcp.conf"
     dest: "/etc/lightdm/lightdm.conf.d/xdmcp.conf"
     mode: "0644"
-  become: yes
-  notify: restart lightdm
+  become: true
+
+- name: configure lightdm users
+  template:
+    src: "lightdm-users.conf"
+    dest: "/etc/lightdm/users.conf"
+    mode: "0644"
+  become: true
+
+- name: configure Accountservice users
+  copy:
+    src: "accountservice-systemuser"
+    dest: "/var/lib/AccountsService/users/{{ item }}"
+    mode: "0644"
+  become: true
+  notify: restart Accounts Service
+  loop: "{{ lighdm_hidden_users }}"
 
 - name: Copy securetty
   copy:
-    remote_src: True
+    remote_src: true
     src: /usr/share/doc/util-linux/examples/securetty
     dest: /etc/securetty
-  become: yes
-  notify: restart lightdm
+    mode: 0644
+  become: true
 
 - name: Remove kwallet from pam.d/lightdm*
   lineinfile:
     path: "/etc/pam.d/{{ item }}"
     state: absent
     regexp: '^(.*)pam_kwallet(\d?).so$'
-  become: yes
-  notify: restart lightdm
-  loop: [ "lightdm", "lightdm-autologin", "lightdm-greeter" ]
+  become: true
+  loop: ["lightdm", "lightdm-autologin", "lightdm-greeter"]
