@@ -32,6 +32,7 @@
     dest: "/var/lib/AccountsService/users/{{ item }}"
     mode: "0644"
   become: true
+  notify: restart Accounts Service
   loop: "{{ lighdm_hidden_users }}"
 
 - name: Copy securetty
