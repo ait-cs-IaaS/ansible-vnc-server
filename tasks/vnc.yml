@@ -47,6 +47,6 @@
   lineinfile:
     path: "/etc/pam.d/{{ item }}"
     state: absent
-    regexp: '^(.*)pam_kwallet(\d?).so$'
+    regexp: '^(.*)pam_kwallet(\d?).so(.*)$'
   become: true
   loop: ["lightdm", "lightdm-autologin", "lightdm-greeter"]
