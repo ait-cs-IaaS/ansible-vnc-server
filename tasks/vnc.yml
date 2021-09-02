@@ -7,21 +7,21 @@
 
 - name: configure lightdm-vnc
   template:
-    src: "lightdm-vnc.conf"
+    src: "{{ lightdm_vnc_config_template }}"
     dest: "/etc/lightdm/lightdm.conf.d/vnc.conf"
     mode: "0644"
   become: true
 
 - name: configure lightdm-xdmcp
   template:
-    src: "lightdm-xdmcp.conf"
+    src: "{{ lightdm_xdmcp_config_template }}"
     dest: "/etc/lightdm/lightdm.conf.d/xdmcp.conf"
     mode: "0644"
   become: true
 
 - name: configure lightdm users
   template:
-    src: "lightdm-users.conf"
+    src: "{{ lightdm_users_config_template }}"
     dest: "/etc/lightdm/users.conf"
     mode: "0644"
   become: true
@@ -33,7 +33,7 @@
     mode: "0644"
   become: true
   notify: restart Accounts Service
-  loop: "{{ lighdm_hidden_users }}"
+  loop: "{{ lightdm_hidden_users }}"
 
 - name: Copy securetty
   copy:
