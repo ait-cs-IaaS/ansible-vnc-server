@@ -9,7 +9,7 @@
 - name: configure websockify
   become: true
   template:
-    src: "websockify.service"
+    src: "{{ websockify_service_template }}"
     dest: "/etc/systemd/system/websockify.service"
     mode: "0644"
 
