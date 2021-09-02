@@ -4,6 +4,9 @@ vnc_server_packages:
 
 websockify_version: "1.0.1"
 vnc_port: 5901
+vnc_screen_width: 1920
+vnc_screen_height: 1080
+vnc_screen_depth: 24
 websockify_port: 7000
 
 lighdm_minimum_uid: 1000
