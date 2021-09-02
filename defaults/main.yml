@@ -9,6 +9,6 @@ vnc_screen_height: 1080
 vnc_screen_depth: 24
 websockify_port: 7000
 
-lighdm_minimum_uid: 1000
-lighdm_hidden_users: ["nobody"]
-lighdm_hidden_shells: ["/bin/false", "/usr/sbin/nologin", "/sbin/nologin"]
+lightdm_minimum_uid: 1000
+lightdm_hidden_users: ["nobody"]
+lightdm_hidden_shells: ["/bin/false", "/usr/sbin/nologin", "/sbin/nologin"]
