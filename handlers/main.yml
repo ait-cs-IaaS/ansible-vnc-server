@@ -10,3 +10,7 @@
   service:
     name: accounts-daemon
     state: restarted
+
+- name: Update dconf
+  become: true
+  command: "dconf update"
