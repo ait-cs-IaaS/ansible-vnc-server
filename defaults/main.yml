@@ -13,6 +13,7 @@ websockify_service_template: websockify.service
 
 lightdm_minimum_uid: 1000
 lightdm_hidden_users: ["nobody"]
+# lightdm_default_user: "username"
 lightdm_hidden_shells: ["/bin/false", "/usr/sbin/nologin", "/sbin/nologin"]
 
 # default templates
