@@ -1,16 +1,16 @@
 ---
 - name: restart lightdm
   become: true
-  service:
+  ansible.builtin.service:
     name: lightdm
     state: restarted
 
 - name: restart Accounts Service
   become: true
-  service:
+  ansible.builtin.service:
     name: accounts-daemon
     state: restarted
 
 - name: Update dconf
   become: true
-  command: "dconf update"
+  ansible.builtin.command: "dconf update"

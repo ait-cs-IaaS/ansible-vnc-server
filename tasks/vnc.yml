@@ -1,33 +1,33 @@
 ---
 - name: vnc server packages
-  apt:
+  ansible.builtin.apt:
     name: "{{ vnc_server_packages }}"
     state: present
   become: true
 
 - name: configure lightdm-vnc
-  template:
+  ansible.builtin.template:
     src: "{{ lightdm_vnc_config_template }}"
     dest: "/etc/lightdm/lightdm.conf.d/vnc.conf"
     mode: "0644"
   become: true
 
 - name: configure lightdm-xdmcp
-  template:
+  ansible.builtin.template:
     src: "{{ lightdm_xdmcp_config_template }}"
     dest: "/etc/lightdm/lightdm.conf.d/xdmcp.conf"
     mode: "0644"
   become: true
 
 - name: configure lightdm users
-  template:
+  ansible.builtin.template:
     src: "{{ lightdm_users_config_template }}"
     dest: "/etc/lightdm/users.conf"
     mode: "0644"
   become: true
 
 - name: configure Accountservice users
-  copy:
+  ansible.builtin.copy:
     src: "accountservice-systemuser"
     dest: "/var/lib/AccountsService/users/{{ item }}"
     mode: "0600"
@@ -36,7 +36,7 @@
   loop: "{{ lightdm_hidden_users }}"
 
 - name: Copy securetty
-  copy:
+  ansible.builtin.copy:
     remote_src: true
     src: /usr/share/doc/util-linux/examples/securetty
     dest: /etc/securetty
@@ -44,7 +44,7 @@
   become: true
 
 - name: Remove kwallet from pam.d/lightdm*
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: "/etc/pam.d/{{ item }}"
     state: absent
     regexp: '^(.*)pam_kwallet(\d?).so(.*)$'
@@ -52,17 +52,16 @@
   loop: ["lightdm", "lightdm-autologin", "lightdm-greeter"]
 
 - name: Copy dbus ibus to dbus local
-  become: true
-  copy:
+  ansible.builtin.copy:
     src: "/etc/dconf/db/ibus"
     dest: "/etc/dconf/db/local"
     mode: 0644
     remote_src: true
   notify: Update dconf
+  become: true
 
 - name: Copy dbus ibus to dbus local
-  become: true
-  copy:
+  ansible.builtin.copy:
     content: |
       user-db:user
       system-db:ibus
@@ -70,3 +69,4 @@
     dest: "/etc/dconf/profile/ibus"
     mode: 0644
   notify: Update dconf
+  become: true
