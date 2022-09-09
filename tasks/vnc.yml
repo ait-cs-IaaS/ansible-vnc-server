@@ -42,6 +42,7 @@
     dest: /etc/securetty
     mode: 0644
   become: true
+  when: ansible_distribution_version == "22.04"
 
 - name: Remove kwallet from pam.d/lightdm*
   ansible.builtin.lineinfile:

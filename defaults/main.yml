@@ -1,6 +1,7 @@
 ---
 vnc_server_packages:
   - tigervnc-standalone-server
+  - ibus
 
 vnc_port: 5901
 vnc_screen_width: 1920
