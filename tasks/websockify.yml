@@ -1,23 +1,22 @@
 ---
 - name: Download websockify
+  become: true
   ansible.builtin.get_url:
-    url: "https://github.com/b3n4kh/websockify-go/releases/download/{{ websockify_version }}/websockify-go"
+    url: https://github.com/b3n4kh/websockify-go/releases/download/{{ websockify_version }}/websockify-go
     dest: /usr/local/bin/websockify-go
     mode: "0755"
+
+- name: Configure websockify
   become: true
-
-
-- name: configure websockify
   ansible.builtin.template:
     src: "{{ websockify_service_template }}"
-    dest: "/etc/systemd/system/websockify.service"
+    dest: /etc/systemd/system/websockify.service
     mode: "0644"
-  become: true
 
 - name: Start websockify service
+  become: true
   ansible.builtin.systemd:
     name: websockify
     enabled: true
     state: started
     daemon_reload: true
-  become: true

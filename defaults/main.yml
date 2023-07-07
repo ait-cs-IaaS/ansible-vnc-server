@@ -1,5 +1,6 @@
 ---
 vnc_server_packages:
+  - lightdm
   - tigervnc-standalone-server
   - ibus
 
@@ -8,15 +9,14 @@ vnc_screen_width: 1920
 vnc_screen_height: 1080
 vnc_screen_depth: 24
 
-websockify_version: "1.0.1"
+websockify_version: 1.0.1
 websockify_port: 7000
 websockify_service_template: websockify.service
 
 lightdm_minimum_uid: 1000
-lightdm_hidden_users: ["nobody"]
+lightdm_hidden_users: [nobody]
 # lightdm_default_user: "username"
-lightdm_hidden_shells: ["/bin/false", "/usr/sbin/nologin", "/sbin/nologin"]
-
+lightdm_hidden_shells: [/bin/false, /usr/sbin/nologin, /sbin/nologin]
 # default templates
 lightdm_vnc_config_template: lightdm-vnc.conf
 lightdm_xdmcp_config_template: lightdm-xdmcp.conf

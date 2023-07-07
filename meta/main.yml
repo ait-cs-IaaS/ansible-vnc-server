@@ -1,3 +1,4 @@
+---
 galaxy_info:
   role_name: vnc-server
   author: Benjamin Akhras
@@ -8,7 +9,7 @@ galaxy_info:
 
   min_ansible_version: "2.10"
 
-  galaxy_tags: ["vnc"]
+  galaxy_tags: [vnc]
   platforms:
     - name: Ubuntu
       versions:
