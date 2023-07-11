@@ -2,7 +2,7 @@
 - name: Configure and install vnc-server
   tags: [vnc]
   ansible.builtin.import_tasks: vnc.yml
-  notify: restart lightdm
+  notify: Restart lightdm
 
 - name: Configure and install websockify
   tags: [websockify]

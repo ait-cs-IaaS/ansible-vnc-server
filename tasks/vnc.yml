@@ -28,7 +28,7 @@
 
 - name: Configure Accountservice users
   become: true
-  notify: restart Accounts Service
+  notify: Restart Accounts Service
   ansible.builtin.copy:
     src: accountservice-systemuser
     dest: /var/lib/AccountsService/users/{{ item }}
