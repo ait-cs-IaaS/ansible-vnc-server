@@ -7,3 +7,12 @@
 - name: Configure and install websockify
   tags: [websockify]
   ansible.builtin.import_tasks: websockify.yml
+  when: vnc_websocket_enabled | bool
+
+- name: Stop websockify service when disabled
+  become: true
+  ansible.builtin.systemd:
+    name: websockify
+    enabled: false
+    state: stopped
+  when: not (vnc_websocket_enabled | bool)
