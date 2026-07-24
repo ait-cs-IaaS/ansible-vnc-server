@@ -11,8 +11,9 @@
 
 - name: Stop websockify service when disabled
   become: true
-  ansible.builtin.systemd:
+  ansible.builtin.systemd_service:
     name: websockify
     enabled: false
     state: stopped
   when: not (vnc_websocket_enabled | bool)
+  failed_when: false
