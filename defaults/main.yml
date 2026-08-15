@@ -4,7 +4,7 @@ vnc_server_packages:
   - tigervnc-standalone-server
   - ibus
 
-vnc_websocket_enable: true
+vnc_websocket_enabled: true
 vnc_listen_address: "{{ '127.0.0.1' if vnc_websocket_enabled else '0.0.0.0' }}"
 
 vnc_port: 5901
