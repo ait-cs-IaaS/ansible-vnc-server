@@ -16,3 +16,4 @@
     enabled: false
     state: stopped
   when: not (vnc_websocket_enabled | bool)
+  ignore_errors: true
